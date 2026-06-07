@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – TravelSphere</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="loading-screen" id="loadingScreen"><div class="loading-logo">✈ TravelSphere</div><div class="loading-bar"><div class="loading-progress"></div></div></div>
+
+  <nav class="navbar"><div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>Travel<span>Sphere</span></a>
+    <div class="nav-links"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="packages.html">Packages</a><a href="hotels.html">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html" class="active">Contact</a></div>
+    <div class="nav-actions"><button class="btn-icon" id="themeToggle" onclick="toggleTheme()" title="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><a href="bookings.html" class="btn btn-primary btn-sm">My Bookings</a></div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div></div></nav>
+  <nav class="mobile-nav" id="mobileNav"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="packages.html">Packages</a><a href="hotels.html">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></nav>
+      <h1>Get in Touch</h1>
+      <p>Our expert travel team is available 24/7 to help plan your perfect trip. We'd love to hear from you.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <!-- Contact Info + Form -->
+      <div style="display:grid;grid-template-columns:400px 1fr;gap:48px;align-items:start;" class="contact-grid">
+        <!-- Info Panel -->
+        <div>
+          <div class="contact-card" style="margin-bottom:24px;">
+            <h3 style="margin-bottom:24px;">Contact Information</h3>
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.25 9.27 19.79 19.79 0 011.18 4.3 2 2 0 013.18 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.91 9.1a16 16 0 006.06 6.06l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div><h4>Phone</h4><p>+1 (888) 555-TRAVEL<br>+44 20 7946 0958</p></div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div><h4>Email</h4><p>hello@travelsphere.com<br>support@travelsphere.com</p></div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div><h4>Office</h4><p>350 Fifth Avenue, Suite 4120<br>New York, NY 10118</p></div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div><h4>Hours</h4><p>24/7 Customer Support<br>Mon–Fri: 9am–6pm EST (Sales)</p></div>
+            </div>
+          </div>
+
+          <!-- About Section -->
+          <div class="dash-card" style="margin-bottom:24px;">
+            <h3 style="margin-bottom:16px;">About TravelSphere</h3>
+            <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.7;margin-bottom:12px;">Founded in 2018, TravelSphere has helped over 500,000 travellers explore 80+ countries. We believe that extraordinary travel experiences should be accessible, seamlessly organised, and deeply memorable.</p>
+            <p style="color:var(--text-secondary);font-size:.875rem;line-height:1.7;">Our team of 200+ travel experts and local guides curate every destination, hotel, and package to ensure you get the most authentic and memorable experience possible.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;">
+              ${[['500K+','Travellers'],['80+','Countries'],['4.9/5','Rating'],['2018','Founded']].map(([v,l])=>`
+                <div style="text-align:center;padding:16px;background:var(--bg-secondary);border-radius:12px;">
+                  <div style="font-size:1.25rem;font-weight:900;color:var(--primary);">${v}</div>
+                  <div style="font-size:.75rem;color:var(--text-muted);">${l}</div>
+                </div>`).join('')}
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="dash-card">
+            <h4 style="margin-bottom:16px;">Follow Our Journey</h4>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              ${[
+                ['Instagram','#e4405f','M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm0-14a2 2 0 100 4 2 2 0 000-4zm5-1a1 1 0 110 2 1 1 0 010-2z'],
+                ['Twitter','#1da1f2','M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016 2a4.48 4.48 0 00-4.47 4.95A12.74 12.74 0 013 4.5s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z'],
+                ['YouTube','#ff0000','M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z'],
+              ].map(([name,color,path]) => `
+                <a href="#" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--border);border-radius:10px;font-size:.8rem;font-weight:600;color:var(--text-secondary);transition:all .2s;" onmouseover="this.style.background='${color}';this.style.color='#fff';this.style.borderColor='${color}'" onmouseout="this.style.background='';this.style.color='var(--text-secondary)';this.style.borderColor='var(--border)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="${path}"/></svg>
+                  ${name}
+                </a>`).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div>
+          <div class="contact-card">
+            <h2 style="margin-bottom:8px;">Send Us a Message</h2>
+            <p style="color:var(--text-muted);margin-bottom:28px;">Fill in the form and our team will respond within 2 hours during business hours.</p>
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">First Name <span class="req">*</span></label>
+                  <input type="text" class="form-input" id="cfFirst" placeholder="First name" required>
+                  <div class="form-error">Required</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name <span class="req">*</span></label>
+                  <input type="text" class="form-input" id="cfLast" placeholder="Last name" required>
+                  <div class="form-error">Required</div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Email <span class="req">*</span></label>
+                  <input type="email" class="form-input" id="cfEmail" placeholder="your@email.com" required>
+                  <div class="form-error">Valid email required</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="tel" class="form-input" id="cfPhone" placeholder="+1 (555) 000-0000">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Enquiry Type <span class="req">*</span></label>
+                <select class="form-select" id="cfType" required>
+                  <option value="">Select enquiry type...</option>
+                  <option>General Enquiry</option>
+                  <option>Booking Assistance</option>
+                  <option>Package Customisation</option>
+                  <option>Cancellation / Refund</option>
+                  <option>Group Travel</option>
+                  <option>Honeymoon / Special Occasion</option>
+                  <option>Corporate Travel</option>
+                  <option>Partnership</option>
+                  <option>Press / Media</option>
+                </select>
+                <div class="form-error">Please select an enquiry type</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Destination of Interest</label>
+                <input type="text" class="form-input" id="cfDestination" placeholder="e.g. Santorini, Maldives, Japan...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Preferred Travel Dates</label>
+                <div class="form-row">
+                  <input type="date" class="form-input" id="cfDateFrom">
+                  <input type="date" class="form-input" id="cfDateTo">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Message <span class="req">*</span></label>
+                <textarea class="form-textarea" id="cfMessage" placeholder="Tell us about your dream trip, any special requirements, budget, or questions..." style="min-height:160px;" required></textarea>
+                <div class="form-error">Please write your message</div>
+                <div class="form-hint" id="charCount">0 / 1000 characters</div>
+              </div>
+              <div class="form-group">
+                <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.875rem;">
+                  <input type="checkbox" id="cfConsent" required style="margin-top:3px;accent-color:var(--primary);">
+                  <span>I agree to the <a href="#" style="color:var(--primary);">Privacy Policy</a> and consent to TravelSphere contacting me about my enquiry.</span>
+                </label>
+                <div class="form-error" id="consentError">You must agree to continue</div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <!-- FAQ -->
+          <div class="dash-card" style="margin-top:32px;">
+            <h3 style="margin-bottom:20px;">Frequently Asked Questions</h3>
+            <div class="faq-item">
+              <div class="faq-question">How far in advance should I book? <span class="faq-icon">▼</span></div>
+              <div class="faq-answer">We recommend booking at least 6–8 weeks in advance for popular destinations, and 3–6 months for peak travel seasons like Christmas, New Year, and summer. Last-minute deals are sometimes available but selection is limited.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">What's your cancellation policy? <span class="faq-icon">▼</span></div>
+              <div class="faq-answer">Cancellations made 30+ days before departure receive a full refund. Between 15–29 days: 75% refund. Between 7–14 days: 50% refund. Within 7 days: non-refundable. Specific policies may vary by package.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Do I need travel insurance? <span class="faq-icon">▼</span></div>
+              <div class="faq-answer">We strongly recommend comprehensive travel insurance for every trip. We partner with leading insurers to offer competitive rates. Every booking includes 24/7 emergency assistance.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Can you customise a package for me? <span class="faq-icon">▼</span></div>
+              <div class="faq-answer">Absolutely. Our expert travel consultants can create a completely bespoke itinerary tailored to your interests, budget, travel dates, and travel style. Contact us to get started.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">What's included in your packages? <span class="faq-icon">▼</span></div>
+              <div class="faq-answer">Each package specifies exactly what's included — typically flights, hotel accommodation, transfers, guided tours, and some meals. Check the "What's Included" section on each package page for exact details.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section style="background:var(--bg-secondary);padding:64px 0;">
+    <div class="container" style="text-align:center;">
+      <h2 style="margin-bottom:8px;">Our Global Offices</h2>
+      <p style="color:var(--text-secondary);margin-bottom:40px;">We have offices in New York, London, Dubai, and Singapore.</p>
+      <div class="map-placeholder" style="height:360px;max-width:900px;margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        <p style="font-weight:600;font-size:1rem;">Interactive World Map</p>
+        <p style="font-size:.875rem;">New York · London · Dubai · Singapore</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="section-tag" style="background:rgba(255,255,255,.2);color:#fff;">✉ Newsletter</div>
+        <h2>Stay Inspired</h2>
+        <p>Get weekly travel inspiration, exclusive deals, and insider tips delivered to your inbox.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#1a1f0e;color:rgba(255,255,255,.6);padding:32px 0;text-align:center;font-size:.875rem;">
+    <div class="container"><p>© 2025 TravelSphere. All rights reserved. | <a href="index.html" style="color:var(--primary)">Back to Home</a></p></div>
+  </footer>
+  <button class="back-to-top" id="backToTop"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Contact Form
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      const fields = [
+        { id: 'cfFirst', rule: v => v.trim().length > 0 },
+        { id: 'cfLast', rule: v => v.trim().length > 0 },
+        { id: 'cfEmail', rule: v => isValidEmail(v.trim()) },
+        { id: 'cfType', rule: v => v !== '' },
+        { id: 'cfMessage', rule: v => v.trim().length >= 10 },
+      ];
+
+      fields.forEach(({ id, rule }) => {
+        const el = document.getElementById(id);
+        const ok = rule(el.value);
+        el.classList.toggle('error', !ok);
+        el.closest('.form-group')?.querySelector('.form-error')?.classList.toggle('show', !ok);
+        if (!ok) valid = false;
+      });
+
+      const consent = document.getElementById('cfConsent');
+      if (!consent.checked) {
+        document.getElementById('consentError').classList.add('show');
+        valid = false;
+      } else {
+        document.getElementById('consentError').classList.remove('show');
+      }
+
+      if (!valid) return;
+
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        showToast('Message sent!', "We'll get back to you within 2 hours.", 'success');
+        this.reset();
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Send Message`;
+        btn.disabled = false;
+      }, 1200);
+    });
+
+    // Character counter
+    document.getElementById('cfMessage').addEventListener('input', function() {
+      document.getElementById('charCount').textContent = `${this.value.length} / 1000 characters`;
+    });
+
+    // FAQ
+    initFAQ();
+  </script>
+</body>
+</html>

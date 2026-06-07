@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Details – TravelSphere</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <nav class="navbar"><div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>Travel<span>Sphere</span></a>
+    <div class="nav-links"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="packages.html">Packages</a><a href="hotels.html" class="active">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
+    <div class="nav-actions"><button class="btn-icon" id="themeToggle" onclick="toggleTheme()" title="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><a href="bookings.html" class="btn btn-primary btn-sm">My Bookings</a></div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div></div></nav>
+  <nav class="mobile-nav" id="mobileNav"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="packages.html">Packages</a><a href="hotels.html">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></nav>
+
+  <div id="pageContent" style="padding-top:72px;"></div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lbClose" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-btn lightbox-prev" id="lbPrev"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <img id="lbImg" src="" alt="" class="lightbox-img">
+    <button class="lightbox-btn lightbox-next" id="lbNext"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+    <div class="lightbox-counter" id="lbCounter"></div>
+  </div>
+  <button class="back-to-top" id="backToTop"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const hotelId = params.get('id');
+
+    function render() {
+      const hotels = Storage.get(DB.hotels) || [];
+      const hotel = hotels.find(h => h.id === hotelId);
+      if (!hotel) {
+        document.getElementById('pageContent').innerHTML = `<div class="container" style="padding:80px 0;text-align:center;"><h2>Hotel not found</h2><a href="hotels.html" class="btn btn-primary" style="margin-top:16px;">Back to Hotels</a></div>`;
+        return;
+      }
+
+      const reviews = (Storage.get(DB.reviews) || []).filter(r => r.hotelId === hotel.id);
+      const galleryImages = [hotel.image,
+        'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
+        'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80',
+        'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&q=80',
+        'https://images.unsplash.com/photo-1456827764597-8a8e82f79b94?w=800&q=80',
+      ];
+
+      document.title = `${hotel.name} – TravelSphere`;
+
+      document.getElementById('pageContent').innerHTML = `
+        <div class="container" style="padding:32px 24px 0;">
+          <nav style="display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text-muted);margin-bottom:24px;">
+            <a href="index.html" style="color:var(--text-muted)">Home</a><span>/</span>
+            <a href="hotels.html" style="color:var(--text-muted)">Hotels</a><span>/</span>
+            <span style="color:var(--text-primary)">${hotel.name}</span>
+          </nav>
+        </div>
+
+        <div class="container" style="padding-bottom:80px;">
+          <!-- Hero Gallery -->
+          <div class="gallery-grid" style="margin-bottom:40px;">
+            ${galleryImages.map((img,i) => `
+              <div class="gallery-item" onclick="openLightbox(${i})" style="${i===0?'grid-column:span 2;grid-row:span 2;':''}">
+                <img src="${img}" alt="Hotel view ${i+1}" loading="lazy">
+                <div class="gallery-overlay">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 6s4-6 11-6 11 6 11 6-4 6-11 6S1 6 1 6z"/><circle cx="12" cy="6" r="2"/></svg>
+                </div>
+              </div>`).join('')}
+          </div>
+
+          <div class="detail-layout">
+            <div>
+              <!-- Header -->
+              <div class="dash-card" style="margin-bottom:24px;">
+                <div class="flex-between" style="flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+                  <div>
+                    <span style="background:var(--primary-light);color:var(--primary);padding:4px 12px;border-radius:999px;font-size:.8rem;font-weight:700;">${hotel.category}</span>
+                  </div>
+                  <span class="booking-status ${hotel.available?'confirmed':'cancelled'}">
+                    <span class="status-dot"></span>
+                    ${hotel.available?'Available to Book':'Currently Fully Booked'}
+                  </span>
+                </div>
+                <h1 style="font-family:'Playfair Display',serif;margin-bottom:8px;">${hotel.name}</h1>
+                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
+                  ${starsHTML(hotel.rating)}
+                  <span style="font-size:.875rem;color:var(--text-muted)">${hotel.reviews} reviews</span>
+                  <span style="display:flex;align-items:center;gap:4px;font-size:.875rem;color:var(--text-muted);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    ${hotel.destination}, ${hotel.country}
+                  </span>
+                </div>
+                <p style="color:var(--text-secondary);line-height:1.7;">${hotel.description}</p>
+              </div>
+
+              <!-- Amenities -->
+              <div class="dash-card" style="margin-bottom:24px;">
+                <h2 style="margin-bottom:20px;">Amenities & Features</h2>
+                <div class="amenities">
+                  ${hotel.amenities.map(a => `<span class="amenity">✓ ${a}</span>`).join('')}
+                </div>
+              </div>
+
+              <!-- Rooms -->
+              <div class="dash-card" style="margin-bottom:24px;">
+                <h2 style="margin-bottom:20px;">Room Types</h2>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  ${hotel.rooms.map((room,i) => `
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--bg-secondary);border-radius:12px;flex-wrap:wrap;gap:12px;">
+                      <div>
+                        <div style="font-weight:700;">${room}</div>
+                        <div style="font-size:.8rem;color:var(--text-muted);">Up to ${2+i*2} guests • ${i===0?'Standard':'Upgraded'} amenities</div>
+                      </div>
+                      <div style="text-align:right;">
+                        <div style="font-weight:800;color:var(--primary);">${formatINR(hotel.pricePerNight + i*6640)} <span style="font-weight:400;color:var(--text-muted);font-size:.8rem;">/ night</span></div>
+                        <a href="bookings.html?hotel=${hotel.id}" class="btn btn-primary btn-sm" style="margin-top:6px;">Book Room</a>
+                      </div>
+                    </div>`).join('')}
+                </div>
+              </div>
+
+              <!-- Map Placeholder -->
+              <div class="dash-card" style="margin-bottom:24px;">
+                <h2 style="margin-bottom:16px;">Location</h2>
+                <div class="map-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <p style="font-weight:600;">${hotel.name}</p>
+                  <p style="font-size:.875rem;">${hotel.destination}, ${hotel.country}</p>
+                  <p style="font-size:.8rem;margin-top:4px;">Interactive map coming soon</p>
+                </div>
+              </div>
+
+              <!-- Reviews -->
+              <div class="dash-card">
+                <h2 style="margin-bottom:20px;">Guest Reviews (${reviews.length})</h2>
+                ${reviews.length > 0 ? `
+                <div class="rating-overview">
+                  <div class="rating-big">
+                    <div class="number">${hotel.rating}</div>
+                    <div>${starsHTML(hotel.rating)}</div>
+                    <div class="out-of">out of 5</div>
+                  </div>
+                  <div class="rating-bars">
+                    ${[5,4,3,2,1].map(star => {
+                      const count = reviews.filter(r=>r.rating===star).length;
+                      const pct = reviews.length ? Math.round((count/reviews.length)*100) : 0;
+                      return `<div class="rating-bar-row"><span class="label">${star}</span><div class="rating-bar-track"><div class="rating-bar-fill" style="width:${pct}%"></div></div><span class="count">${count}</span></div>`;
+                    }).join('')}
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:16px;">
+                  ${reviews.map(r => `
+                    <div class="review-card">
+                      <div class="review-header">
+                        <div class="review-author">
+                          <div class="author-avatar">${r.avatar}</div>
+                          <div>
+                            <div style="font-weight:700;">${r.userName}</div>
+                            <div style="font-size:.8rem;color:var(--text-muted);">${formatDate(r.date)}</div>
+                          </div>
+                        </div>
+                        ${starsHTML(r.rating)}
+                      </div>
+                      <div class="review-title">${r.title}</div>
+                      <div class="review-body">${r.body}</div>
+                    </div>`).join('')}
+                </div>` : `<p style="color:var(--text-muted);">No reviews yet for this hotel.</p>`}
+              </div>
+            </div>
+
+            <!-- Booking Sidebar -->
+            <aside class="detail-sidebar">
+              <div class="booking-card">
+                <div class="price-line">
+                  <span class="price-amount">${formatINR(hotel.pricePerNight)}</span>
+                  <span class="price-per">/ night</span>
+                </div>
+                <div style="margin-bottom:20px;">
+                  <label class="form-label">Check-in</label>
+                  <input type="date" class="form-input" id="checkIn" style="margin-bottom:8px;">
+                  <label class="form-label">Check-out</label>
+                  <input type="date" class="form-input" id="checkOut">
+                </div>
+                <div style="margin-bottom:20px;">
+                  <label class="form-label">Room Type</label>
+                  <select class="form-select" id="roomType">
+                    ${hotel.rooms.map(r=>`<option>${r}</option>`).join('')}
+                  </select>
+                </div>
+                <div style="margin-bottom:20px;">
+                  <label class="form-label">Guests</label>
+                  <select class="form-select" id="guestCount">
+                    ${[1,2,3,4].map(n=>`<option value="${n}">${n} Guest${n>1?'s':''}</option>`).join('')}
+                  </select>
+                </div>
+                <div id="priceSummary" style="background:var(--bg-secondary);border-radius:12px;padding:16px;margin-bottom:16px;display:none;">
+                  <div class="summary-line" style="border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;">
+                    <span style="color:var(--text-secondary);font-size:.875rem;">Price breakdown</span>
+                  </div>
+                  <div id="nightsCalc" style="font-size:.875rem;color:var(--text-secondary);"></div>
+                  <div id="totalCalc" style="font-weight:800;font-size:1.1rem;color:var(--primary);margin-top:8px;"></div>
+                </div>
+                <a href="bookings.html?hotel=${hotel.id}" class="btn btn-primary btn-full" style="margin-bottom:8px;">Reserve Now</a>
+                <p style="font-size:.75rem;color:var(--text-muted);text-align:center;">Free cancellation up to 24 hours before check-in</p>
+              </div>
+
+              <div class="dash-card" style="margin-top:16px;">
+                <h4 style="margin-bottom:12px;">Quick Info</h4>
+                ${[
+                  ['🏨','Category',hotel.category],
+                  ['📍','Location',`${hotel.destination}, ${hotel.country}`],
+                  ['⭐','Rating',`${hotel.rating}/5`],
+                  ['💰','From',formatINR(hotel.pricePerNight)+'/night'],
+                ].map(([i,l,v])=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:.875rem;"><span style="color:var(--text-muted);">${i} ${l}</span><span style="font-weight:600;">${v}</span></div>`).join('')}
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <footer style="background:#1a1f0e;color:rgba(255,255,255,.6);padding:32px 0;text-align:center;font-size:.875rem;">
+          <div class="container"><p>© 2025 TravelSphere | <a href="hotels.html" style="color:var(--primary)">← Back to Hotels</a></p></div>
+        </footer>
+      `;
+
+      // Price calculator
+      ['checkIn','checkOut','roomType'].forEach(id => {
+        document.getElementById(id)?.addEventListener('change', calcPrice);
+      });
+
+      function calcPrice() {
+        const ci = document.getElementById('checkIn').value;
+        const co = document.getElementById('checkOut').value;
+        if (!ci || !co) return;
+        const nights = daysBetween(ci, co);
+        if (nights <= 0) return;
+        const roomIdx = document.getElementById('roomType').selectedIndex;
+        const price = hotel.pricePerNight + roomIdx * 80;
+        const total = nights * price;
+        document.getElementById('nightsCalc').textContent = `${formatINR(price)} x ${nights} night${nights>1?'s':''}`;
+        document.getElementById('totalCalc').textContent = `Total: ${formatINR(total)}`;
+        document.getElementById('priceSummary').style.display = 'block';
+      }
+
+      initLightbox(galleryImages);
+      document.getElementById('lbPrev').addEventListener('click', () => showLightboxImage(lightboxIndex - 1));
+      document.getElementById('lbNext').addEventListener('click', () => showLightboxImage(lightboxIndex + 1));
+    }
+
+    render();
+  </script>
+</body>
+</html>

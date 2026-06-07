@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations – TravelSphere</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="loading-screen" id="loadingScreen"><div class="loading-logo">✈ TravelSphere</div><div class="loading-bar"><div class="loading-progress"></div></div></div>
+
+  <nav class="navbar"><div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>Travel<span>Sphere</span></a>
+    <div class="nav-links"><a href="index.html">Home</a><a href="destinations.html" class="active">Destinations</a><a href="packages.html">Packages</a><a href="hotels.html">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
+    <div class="nav-actions"><button class="btn-icon" id="themeToggle" onclick="toggleTheme()" title="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><a href="bookings.html" class="btn btn-primary btn-sm">My Bookings</a></div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div></div></nav>
+  <nav class="mobile-nav" id="mobileNav"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="packages.html">Packages</a><a href="hotels.html">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Destinations</span></nav>
+      <h1>Explore Destinations</h1>
+      <p>Discover 20 extraordinary destinations handpicked by our travel experts. From hidden gems to iconic landmarks.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="filter-row">
+          <div class="filter-group" style="flex:2;min-width:220px;">
+            <label>Search</label>
+            <input type="text" id="searchInput" placeholder="Search destinations or countries..." oninput="applyFilters()">
+          </div>
+          <div class="filter-group">
+            <label>Continent</label>
+            <select id="continentFilter" onchange="applyFilters()">
+              <option value="">All Continents</option>
+              <option>Europe</option><option>Asia</option><option>Africa</option>
+              <option>South America</option><option>North America</option><option>Oceania</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Budget</label>
+            <select id="budgetFilter" onchange="applyFilters()">
+              <option value="">Any Budget</option>
+              <option value="$">Budget ($)</option>
+              <option value="$$">Mid-Range ($$)</option>
+              <option value="$$$">Premium ($$$)</option>
+              <option value="$$$$">Luxury ($$$$)</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Season</label>
+            <select id="seasonFilter" onchange="applyFilters()">
+              <option value="">Any Season</option>
+              <option>Spring</option><option>Summer</option><option>Autumn</option><option>Winter</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Adventure Level</label>
+            <select id="adventureFilter" onchange="applyFilters()">
+              <option value="">Any Level</option>
+              <option>Easy</option><option>Moderate</option><option>Challenging</option><option>Extreme</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Sort By</label>
+            <select id="sortFilter" onchange="applyFilters()">
+              <option value="popularity">Most Popular</option>
+              <option value="rating">Highest Rated</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name">Name: A–Z</option>
+            </select>
+          </div>
+          <div class="filter-group" style="min-width:auto;">
+            <label>&nbsp;</label>
+            <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-between" style="margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <div id="resultsCount" style="color:var(--text-secondary);font-size:.875rem;"></div>
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid view">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="List view">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid-4" id="destinationsGrid"></div>
+    </div>
+  </section>
+
+  <footer style="background:#1a1f0e;color:rgba(255,255,255,.6);padding:32px 0;text-align:center;font-size:.875rem;">
+    <div class="container"><p>© 2025 TravelSphere. All rights reserved. | <a href="index.html" style="color:var(--primary)">Back to Home</a></p></div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    let allDestinations = [];
+    let currentView = 'grid';
+
+    function init() {
+      allDestinations = Storage.get(DB.destinations) || [];
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q');
+      if (q) document.getElementById('searchInput').value = q;
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const continent = document.getElementById('continentFilter').value;
+      const budget = document.getElementById('budgetFilter').value;
+      const season = document.getElementById('seasonFilter').value;
+      const adventure = document.getElementById('adventureFilter').value;
+      const sort = document.getElementById('sortFilter').value;
+
+      let filtered = allDestinations.filter(d => {
+        if (q && !d.name.toLowerCase().includes(q) && !d.country.toLowerCase().includes(q) && !d.description.toLowerCase().includes(q)) return false;
+        if (continent && d.continent !== continent) return false;
+        if (budget && d.priceRange !== budget) return false;
+        if (season && !d.season.includes(season)) return false;
+        if (adventure && d.adventureLevel !== adventure) return false;
+        return true;
+      });
+
+      filtered.sort((a,b) => {
+        switch(sort) {
+          case 'rating': return b.rating - a.rating;
+          case 'price-asc': return a.minPrice - b.minPrice;
+          case 'price-desc': return b.minPrice - a.minPrice;
+          case 'name': return a.name.localeCompare(b.name);
+          default: return b.popularity - a.popularity;
+        }
+      });
+
+      document.getElementById('resultsCount').textContent = `Showing ${filtered.length} of ${allDestinations.length} destinations`;
+      renderDestinations(filtered);
+    }
+
+    function renderDestinations(destinations) {
+      const grid = document.getElementById('destinationsGrid');
+      grid.className = currentView === 'grid' ? 'grid-4' : '';
+      if (destinations.length === 0) {
+        grid.innerHTML = `<div class="no-results" style="grid-column:1/-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <h3>No destinations found</h3><p>Try adjusting your search filters</p></div>`;
+        return;
+      }
+      grid.innerHTML = destinations.map(d => currentView === 'grid' ? gridCard(d) : listCard(d)).join('');
+    }
+
+    function gridCard(d) {
+      return `<article class="card dest-card" onclick="location.href='destination-details.html?id=${d.id}'" style="cursor:pointer">
+        <div class="card-img">
+          <img src="${d.image}" alt="${d.name}" loading="lazy">
+          <div class="overlay"></div>
+          <span class="card-badge">${d.priceRange}</span>
+          <button class="card-fav" onclick="event.stopPropagation();this.classList.toggle('active')" aria-label="Favourite">♥</button>
+          <div class="card-info">
+            <h3>${d.name}</h3>
+            <div class="location-tag">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              ${d.country}
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">${starsHTML(d.rating)}<span style="font-size:.8rem;color:var(--text-muted)">${d.reviews.toLocaleString()} reviews</span></div>
+          <p class="card-desc">${d.description}</p>
+          <div class="tags" style="margin-bottom:12px;">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+          <div class="card-footer">
+            <div><div style="font-size:.75rem;color:var(--text-muted)">From</div><div class="card-price">${formatINR(d.minPrice)} <span>/ person</span></div></div>
+            <a href="destination-details.html?id=${d.id}" class="btn btn-primary btn-sm">Explore</a>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function listCard(d) {
+      return `<article class="card" style="display:grid;grid-template-columns:280px 1fr;cursor:pointer;margin-bottom:16px;" onclick="location.href='destination-details.html?id=${d.id}'">
+        <div style="position:relative;overflow:hidden;height:200px;">
+          <img src="${d.image}" alt="${d.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <span class="card-badge">${d.adventureLevel}</span>
+        </div>
+        <div class="card-body">
+          <div class="flex-between" style="margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+            <h3>${d.name}, ${d.country}</h3>
+            ${starsHTML(d.rating)}
+          </div>
+          <p style="color:var(--text-secondary);font-size:.875rem;margin-bottom:12px;">${d.description}</p>
+          <div class="tags" style="margin-bottom:12px;">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+          <div class="flex-between" style="flex-wrap:wrap;gap:8px;">
+            <div>
+              <div style="font-size:.75rem;color:var(--text-muted)">Best Season: ${d.season.join(', ')}</div>
+              <div class="card-price">From ${formatINR(d.minPrice)} <span>/ person</span></div>
+            </div>
+            <a href="destination-details.html?id=${d.id}" class="btn btn-primary btn-sm">Explore →</a>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function setView(v) {
+      currentView = v;
+      document.getElementById('gridViewBtn').classList.toggle('active', v === 'grid');
+      document.getElementById('listViewBtn').classList.toggle('active', v === 'list');
+      applyFilters();
+    }
+
+    function resetFilters() {
+      ['searchInput','continentFilter','budgetFilter','seasonFilter','adventureFilter'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      document.getElementById('sortFilter').value = 'popularity';
+      applyFilters();
+    }
+
+    init();
+  </script>
+</body>
+</html>

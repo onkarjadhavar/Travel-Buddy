@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Packages – TravelSphere</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="loading-screen" id="loadingScreen"><div class="loading-logo">✈ TravelSphere</div><div class="loading-bar"><div class="loading-progress"></div></div></div>
+
+  <nav class="navbar"><div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>Travel<span>Sphere</span></a>
+    <div class="nav-links"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="packages.html" class="active">Packages</a><a href="hotels.html">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
+    <div class="nav-actions"><button class="btn-icon" id="themeToggle" onclick="toggleTheme()" title="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button><a href="bookings.html" class="btn btn-primary btn-sm">My Bookings</a></div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div></div></nav>
+  <nav class="mobile-nav" id="mobileNav"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="packages.html">Packages</a><a href="hotels.html">Hotels</a><a href="trip-planner.html">Plan Trip</a><a href="bookings.html">Bookings</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Packages</span></nav>
+      <h1>Travel Packages</h1>
+      <p>All-inclusive travel packages with flights, hotels, transfers, and curated experiences. Just show up and explore.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar">
+        <div class="filter-row">
+          <div class="filter-group" style="flex:2;">
+            <label>Search</label>
+            <input type="text" id="searchInput" placeholder="Search packages, destinations..." oninput="applyFilters()">
+          </div>
+          <div class="filter-group">
+            <label>Type</label>
+            <select id="typeFilter" onchange="applyFilters()">
+              <option value="">All Types</option>
+              <option>Adventure</option><option>Beach</option><option>Cultural</option>
+              <option>Luxury</option><option>Romantic</option><option>Wellness</option>
+              <option>Nature</option><option>Skiing</option><option>Urban</option><option>Historic</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Duration</label>
+            <select id="durationFilter" onchange="applyFilters()">
+              <option value="">Any Duration</option>
+              <option value="short">Short (≤5 days)</option>
+              <option value="medium">Medium (6–9 days)</option>
+              <option value="long">Long (10+ days)</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Max Price</label>
+            <select id="priceFilter" onchange="applyFilters()">
+              <option value="">Any Price</option>
+              <option value="124500">Under ₹1.25 L</option>
+              <option value="207500">Under ₹2.07 L</option>
+              <option value="332000">Under ₹3.32 L</option>
+              <option value="498000">Under ₹4.98 L</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Sort By</label>
+            <select id="sortFilter" onchange="applyFilters()">
+              <option value="rating">Highest Rated</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="duration-asc">Shortest First</option>
+              <option value="duration-desc">Longest First</option>
+            </select>
+          </div>
+          <div class="filter-group" style="min-width:auto;">
+            <label>&nbsp;</label>
+            <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-between" style="margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+        <div id="resultsCount" style="color:var(--text-secondary);font-size:.875rem;"></div>
+      </div>
+
+      <div class="grid-3" id="packagesGrid"></div>
+
+      <!-- Package Detail Modal -->
+      <div class="modal-overlay" id="packageModal">
+        <div class="modal" style="max-width:700px;" id="packageModalContent"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#1a1f0e;color:rgba(255,255,255,.6);padding:32px 0;text-align:center;font-size:.875rem;">
+    <div class="container"><p>© 2025 TravelSphere | <a href="index.html" style="color:var(--primary)">Back to Home</a></p></div>
+  </footer>
+  <button class="back-to-top" id="backToTop"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    let allPackages = [];
+
+    function init() {
+      allPackages = Storage.get(DB.packages) || [];
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (id) {
+        const pkg = allPackages.find(p => p.id === id);
+        if (pkg) setTimeout(() => openPackageModal(pkg), 400);
+      }
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const type = document.getElementById('typeFilter').value;
+      const duration = document.getElementById('durationFilter').value;
+      const maxPrice = document.getElementById('priceFilter').value;
+      const sort = document.getElementById('sortFilter').value;
+
+      let filtered = allPackages.filter(p => {
+        if (q && !p.name.toLowerCase().includes(q) && !p.destination.toLowerCase().includes(q)) return false;
+        if (type && p.type !== type) return false;
+        if (duration === 'short' && p.duration > 5) return false;
+        if (duration === 'medium' && (p.duration < 6 || p.duration > 9)) return false;
+        if (duration === 'long' && p.duration < 10) return false;
+        if (maxPrice && p.price > parseInt(maxPrice)) return false;
+        return true;
+      });
+
+      filtered.sort((a,b) => {
+        switch(sort) {
+          case 'price-asc': return a.price - b.price;
+          case 'price-desc': return b.price - a.price;
+          case 'duration-asc': return a.duration - b.duration;
+          case 'duration-desc': return b.duration - a.duration;
+          default: return b.rating - a.rating;
+        }
+      });
+
+      document.getElementById('resultsCount').textContent = `Showing ${filtered.length} of ${allPackages.length} packages`;
+      renderPackages(filtered);
+    }
+
+    function renderPackages(packages) {
+      const grid = document.getElementById('packagesGrid');
+      if (packages.length === 0) {
+        grid.innerHTML = `<div class="no-results" style="grid-column:1/-1;text-align:center;padding:80px 0;">
+          <h3>No packages found</h3><p style="color:var(--text-muted)">Try changing your filters</p>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="resetFilters()">Clear Filters</button></div>`;
+        return;
+      }
+      grid.innerHTML = packages.map(p => `
+        <article class="card pkg-card" style="cursor:pointer;">
+          <div class="card-img" onclick="openPackageModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+            <img src="${p.image}" alt="${p.name}" loading="lazy">
+            <span class="card-badge">${p.duration} Days</span>
+            <span class="pkg-type">${p.type}</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">${starsHTML(p.rating)}<span style="font-size:.8rem;color:var(--text-muted)">${p.reviews} reviews</span></div>
+            <h3 class="card-title">${p.name}</h3>
+            <div class="pkg-meta">
+              <div class="pkg-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                ${p.destination}
+              </div>
+              <div class="pkg-meta-item">✈ ${p.transport}</div>
+              <div class="pkg-meta-item">🏨 ${p.hotelCategory}</div>
+            </div>
+            <div class="pkg-includes">
+              ${p.included.slice(0,4).map(i=>`<div class="pkg-include-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>${i}</div>`).join('')}
+              ${p.included.length > 4 ? `<div style="font-size:.75rem;color:var(--text-muted);">+${p.included.length-4} more included</div>` : ''}
+            </div>
+            <div class="card-footer">
+              <div>
+                <div style="font-size:.75rem;color:var(--text-muted)">Per person</div>
+                <div class="card-price">${formatINR(p.price)}</div>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-secondary btn-sm" onclick="openPackageModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">Details</button>
+                <a href="bookings.html?pkg=${p.id}" class="btn btn-primary btn-sm">Book</a>
+              </div>
+            </div>
+          </div>
+        </article>`).join('');
+    }
+
+    function openPackageModal(pkg) {
+      if (typeof pkg === 'string') pkg = JSON.parse(pkg);
+      const content = document.getElementById('packageModalContent');
+      content.innerHTML = `
+        <div class="modal-header">
+          <h3>${pkg.name}</h3>
+          <button class="modal-close" onclick="closeModal('packageModal')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <img src="${pkg.image}" alt="${pkg.name}" style="width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+          <div style="padding:16px;background:var(--bg-secondary);border-radius:12px;text-align:center;">
+            <div style="font-size:1.5rem;font-weight:900;color:var(--primary);">${pkg.duration}</div>
+            <div style="font-size:.8rem;color:var(--text-muted);">Days</div>
+          </div>
+          <div style="padding:16px;background:var(--bg-secondary);border-radius:12px;text-align:center;">
+            <div style="font-size:1.5rem;font-weight:900;color:var(--primary);">${formatINR(pkg.price)}</div>
+            <div style="font-size:.8rem;color:var(--text-muted);">Per Person</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <h4 style="margin-bottom:12px;">What's Included</h4>
+          <div class="includes-grid">
+            ${pkg.included.map(i=>`<div class="include-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>${i}</div>`).join('')}
+          </div>
+        </div>
+        <div style="margin-bottom:20px;">
+          <h4 style="margin-bottom:12px;">Highlights</h4>
+          <div class="highlight-list">
+            ${pkg.highlights.split(',').map(h=>`<div class="highlight-item">${h.trim()}</div>`).join('')}
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-secondary" style="flex:1;" onclick="closeModal('packageModal')">Close</button>
+          <a href="bookings.html?pkg=${pkg.id}" class="btn btn-primary" style="flex:1;">Book This Package →</a>
+        </div>`;
+      openModal('packageModal');
+    }
+
+    function resetFilters() {
+      ['searchInput','typeFilter','durationFilter','priceFilter'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      document.getElementById('sortFilter').value = 'rating';
+      applyFilters();
+    }
+
+    document.getElementById('packageModal').addEventListener('click', e => {
+      if (e.target === document.getElementById('packageModal')) closeModal('packageModal');
+    });
+
+    init();
+  </script>
+</body>
+</html>

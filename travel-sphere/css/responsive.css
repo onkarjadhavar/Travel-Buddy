@@ -1,0 +1,115 @@
+/* ============================================================
+   responsive.css — TravelSphere Responsive Breakpoints
+   ============================================================ */
+
+/* ── Large Screens (≥1280px) ─── */
+@media (min-width: 1280px) {
+  .container { padding: 0 48px; }
+}
+
+/* ── Laptops (≤1024px) ─── */
+@media (max-width: 1024px) {
+  :root { --section-py: 72px; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .planner-layout { grid-template-columns: 1fr; }
+  .planner-sidebar { position: static; }
+  .search-bar { padding: 6px; }
+}
+
+/* ── Tablets (≤768px) ─── */
+@media (max-width: 768px) {
+  /* Contact & Bookings grids */
+  .contact-grid,
+  .booking-main-grid,
+  .reviews-grid { grid-template-columns: 1fr !important; }
+  :root { --section-py: 56px; --nav-h: 64px; }
+
+  /* Nav */
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-actions .btn { display: none; }
+
+  /* Layout */
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  /* Hero */
+  .hero h1 { font-size: clamp(2rem, 6vw, 3rem); }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .search-bar { flex-direction: column; border-radius: var(--radius-lg); }
+  .search-divider { display: none; }
+  .search-field { width: 100%; }
+  .search-btn { width: 100%; justify-content: center; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Gallery */
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+
+  /* Planner */
+  .planner-layout { grid-template-columns: 1fr; }
+
+  /* Filter */
+  .filter-row { flex-direction: column; }
+  .filter-group { min-width: 100%; }
+
+  /* Page Hero */
+  .page-hero { padding: calc(var(--nav-h) + 32px) 0 48px; }
+
+  /* Tabs */
+  .tab-list { overflow-x: auto; }
+  .tab-btn { white-space: nowrap; }
+}
+
+/* ── Mobile (≤480px) ─── */
+@media (max-width: 480px) {
+  :root { --section-py: 48px; }
+  .container { padding: 0 16px; }
+
+  /* Typography */
+  .section-header { margin-bottom: 36px; }
+
+  /* Cards */
+  .card-body { padding: 16px; }
+  .modal { padding: 24px; }
+  .modal-overlay { padding: 16px; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { padding: 28px 20px; }
+
+  /* Newsletter */
+  .newsletter-form { flex-direction: column; border-radius: var(--radius-lg); }
+  .newsletter-form input { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+  .newsletter-form button { border-radius: 0 0 var(--radius-md) var(--radius-md); width: 100%; }
+
+  /* Gallery */
+  .gallery-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+
+  /* Review */
+  .review-header { flex-direction: column; gap: 12px; }
+
+  /* Booking confirm */
+  .confirm-details { padding: 20px; }
+
+  /* Back to top */
+  .back-to-top { bottom: 24px; right: 16px; }
+  .toast-container { right: 16px; left: 16px; }
+  .toast { min-width: auto; max-width: 100%; }
+
+  /* Dash */
+  .dash-card { padding: 20px; }
+}
+
+/* ── Print ─── */
+@media print {
+  .navbar, footer, .back-to-top, .toast-container, .loading-screen { display: none !important; }
+  body { color: #000; background: #fff; }
+  .page-hero { background: #f0f0f0 !important; }
+}
