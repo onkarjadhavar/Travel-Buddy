@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "travel-sphere/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "travel-sphere/**/*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "travel-sphere/**/*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "travel-sphere/assets/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/travel-sphere/index.html" },
+    { "src": "/index", "dest": "/travel-sphere/index.html" },
+    { "src": "/destinations", "dest": "/travel-sphere/destinations.html" },
+    { "src": "/destination-details", "dest": "/travel-sphere/destination-details.html" },
+    { "src": "/packages", "dest": "/travel-sphere/packages.html" },
+    { "src": "/hotels", "dest": "/travel-sphere/hotels.html" },
+    { "src": "/hotel-details", "dest": "/travel-sphere/hotel-details.html" },
+    { "src": "/trip-planner", "dest": "/travel-sphere/trip-planner.html" },
+    { "src": "/bookings", "dest": "/travel-sphere/bookings.html" },
+    { "src": "/reviews", "dest": "/travel-sphere/reviews.html" },
+    { "src": "/contact", "dest": "/travel-sphere/contact.html" },
+
+    { "src": "/css/(.*)", "dest": "/travel-sphere/css/$1" },
+    { "src": "/js/(.*)", "dest": "/travel-sphere/js/$1" },
+    { "src": "/assets/(.*)", "dest": "/travel-sphere/assets/$1" },
+
+    { "src": "/(.*)", "dest": "/travel-sphere/$1" }
+  ]
+}
+

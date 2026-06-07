@@ -1,4 +1,31 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false
+  "version": 2,
+  "builds": [
+    {
+      "src": "**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.js",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/index", "dest": "/index.html" },
+    { "src": "/destinations", "dest": "/destinations.html" },
+    { "src": "/destination-details", "dest": "/destination-details.html" },
+    { "src": "/packages", "dest": "/packages.html" },
+    { "src": "/hotels", "dest": "/hotels.html" },
+    { "src": "/hotel-details", "dest": "/hotel-details.html" },
+    { "src": "/trip-planner", "dest": "/trip-planner.html" },
+    { "src": "/bookings", "dest": "/bookings.html" },
+    { "src": "/reviews", "dest": "/reviews.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
 }

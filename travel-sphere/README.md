@@ -1,69 +1,98 @@
 # TravelSphere — Premium Travel Booking & Trip Planning Platform
 
-A fully functional, production-ready frontend web application for travel booking and trip planning.
+## 🚀 Deploy to Vercel (Fix 404)
 
-## 🚀 Live Demo
-Deploy to Vercel by connecting this repository.
+There are **two ways** to deploy. Pick the one that matches how you pushed to GitHub.
+
+---
+
+### ✅ Method 1 — Recommended (Set Root Directory)
+
+If you pushed the entire `Travel buddy` folder (or just `travel-sphere`) to GitHub:
+
+1. Go to [vercel.com](https://vercel.com) → **New Project** → Import your repo
+2. In **Configure Project** settings:
+   - **Root Directory** → click **Edit** → type `travel-sphere`
+   - **Framework Preset** → `Other`
+   - **Build Command** → leave empty
+   - **Output Directory** → leave empty
+3. Click **Deploy** ✅
+
+---
+
+### ✅ Method 2 — Push only the travel-sphere folder
+
+Push **only the contents of `travel-sphere/`** as the root of a new GitHub repo:
+
+```
+my-github-repo/
+├── index.html
+├── destinations.html
+├── packages.html
+├── hotels.html
+├── hotel-details.html
+├── destination-details.html
+├── trip-planner.html
+├── bookings.html
+├── reviews.html
+├── contact.html
+├── css/
+├── js/
+├── assets/
+└── vercel.json
+```
+
+Then deploy on Vercel with:
+- **Root Directory** → `/` (default)
+- **Framework Preset** → `Other`
+- Click **Deploy** ✅
+
+---
+
+## 💻 Run Locally
+
+Just open `index.html` directly in any browser — no server needed.
+
+Or use VS Code Live Server:
+1. Install **Live Server** extension
+2. Right-click `index.html` → **Open with Live Server**
+
+---
 
 ## 📁 Project Structure
+
 ```
 travel-sphere/
 ├── index.html                  # Home page
-├── destinations.html           # Destination discovery with filters
-├── destination-details.html    # Individual destination page
-├── packages.html               # Travel packages with modal
-├── hotels.html                 # Hotel listings with filters
-├── hotel-details.html          # Individual hotel page
-├── trip-planner.html           # Interactive trip planner
+├── destinations.html           # Destination discovery
+├── destination-details.html    # Single destination
+├── packages.html               # Travel packages
+├── hotels.html                 # Hotel listings
+├── hotel-details.html          # Single hotel
+├── trip-planner.html           # Trip planner + budget calculator
 ├── bookings.html               # Booking form + dashboard
 ├── reviews.html                # Review system (CRUD)
 ├── contact.html                # Contact form + FAQ
 ├── css/
-│   ├── style.css               # Core styles
-│   ├── components.css          # Component styles
-│   └── responsive.css          # Responsive breakpoints
-└── js/
-    ├── storage.js              # LocalStorage + seed data (20 destinations, 20 hotels, 20 packages, 50 reviews)
-    └── app.js                  # Core utilities and shared functions
+│   ├── style.css
+│   ├── components.css
+│   └── responsive.css
+├── js/
+│   ├── app.js                  # Core utilities
+│   └── storage.js              # LocalStorage + 20/20/20/50 seed data
+├── vercel.json
+└── README.md
 ```
 
 ## ✨ Features
-- **20 Destinations** — Santorini, Kyoto, Maldives, Patagonia, Iceland, and more
-- **20 Hotels** — From overwater villas to alpine chalets
-- **20 Travel Packages** — All-inclusive itineraries with pricing
-- **50 Reviews** — Realistic traveller reviews with ratings
-- Real-time search and multi-filter engine
-- Trip Planner with budget calculator and itinerary generator
-- Full booking system with form validation and confirmation
-- CRUD reviews with ratings
-- Dark/Light mode toggle
+- 20 destinations, 20 hotels, 20 packages, 50 reviews
+- All prices in ₹ INR
+- Olive green & white theme
+- Dark / Light mode
+- Real-time search & filters
+- Trip planner with budget calculator
+- Full booking system with confirmation
+- CRUD reviews with star ratings
 - Lightbox image gallery
-- Responsive on all screen sizes
-- localStorage persistence — all data survives page refresh
-
-## 🛠 Tech Stack
-- HTML5, CSS3, Vanilla JavaScript (ES6+)
-- No frameworks or dependencies
-- Google Fonts (Inter + Playfair Display)
-- Unsplash images (via URL, no download required)
-
-## 🌐 Deploy to Vercel
-1. Push this repository to GitHub
-2. Go to [vercel.com](https://vercel.com) → New Project
-3. Import your GitHub repository
-4. Set **Root Directory** to `travel-sphere`
-5. Framework Preset: **Other**
-6. Click **Deploy** ✅
-
-## 💻 Run Locally
-Simply open `index.html` in any modern browser.
-No build step, no server required.
-
-## 🎨 Design Highlights
-- Glassmorphism effects
-- Smooth CSS animations
-- Skeleton loading states
-- Toast notifications
-- Animated counters
-- Professional gradient palette
-- Mobile-first responsive design
+- Fully responsive (mobile / tablet / desktop)
+- localStorage persistence
